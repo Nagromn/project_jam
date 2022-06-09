@@ -1,0 +1,28 @@
+<!-- If log in, user can send message to a product owner -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+
+<!-- SENDING MESSAGE SECTION -->
+<section>
+      <h2>Messagerie interne</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form action="messenger.php" method="POST">
+                              <input type="hidden" name="id" value="<?= $_GET['id'];?>">
+                              <div>
+                                    <label for="title">Objet :</label>
+                                    <input type="text" name="title" id="title" required>
+                              </div>
+                              <div>
+                                    <label for="content">Message :</label>
+                                    <textarea name="content" id="content" required></textarea>
+                              </div>
+                              <div class="form-button">
+                                    <button type="submit" class="submit"><i class="fas fa-paper-plane fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

@@ -1,0 +1,23 @@
+<?php if (Session::isConnected() && $_SESSION['auth']['role'] == 2):?>
+<section>
+      <h2>Modification du rôle</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form action="" method="POST">
+                              <!-- Input that is keeping id when refreshing page -->
+                              <input type="hidden" name="id" value="<?= htmlspecialchars($id); ?>">
+                              <!-- User current personnal data in database display -->
+                              <div>
+                                    <label for="role">Rôle:</label>
+                                    <input type="text" id="role" name="role" value="<?= htmlspecialchars($role['name']);?>">
+                              </div>
+                              <div class="form-button">
+                                    <button class="submit" type="submit"><i class="edit fas fa-edit fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

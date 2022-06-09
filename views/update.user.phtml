@@ -1,0 +1,53 @@
+<?php if (Session::isConnected() && $_SESSION['auth']) : ?>
+      <section>
+            <h2>Modification de vos données personnelles</h2>
+            <div class="background">
+                  <div class="userdata">
+                        <div class="panel">
+                              <form method="POST">
+                                    <!-- Input that is keeping id when refreshing page -->
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars($id); ?>">
+                                    <!-- User current personnal data display -->
+                                    <div>
+                                          <label for="email">Email</label>
+                                          <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?= htmlspecialchars($user['email']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="firstname">Prénom</label>
+                                          <input type="text" id="firstname" name="firstname" value="<?= htmlspecialchars($user['firstname']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="lastname">Nom</label>
+                                          <input type="text" id="lastname" name="lastname" value="<?= htmlspecialchars($user['lastname']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="birthdate">Date de naissance</label>
+                                          <input type="date" id="birthdate" name="birthdate" value="<?= htmlspecialchars($user['birthdate']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="phone">Tél</label>
+                                          <input type="tel" id="phone" name="phone" pattern="0[1-68]([-. ]?[0-9]{2}){4}" value="<?= htmlspecialchars($user['phone']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="address">Adresse</label>
+                                          <input type="text" id="address" name="address" value="<?= htmlspecialchars($user['address']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="city">Commune</label>
+                                          <input type="text" id="city" name="city" value="<?= htmlspecialchars($user['city']); ?>">
+                                    </div>
+                                    <div>
+                                          <label for="zipcode">Code postal</label>
+                                          <input type="text" id="zipcode" name="zipcode" value="<?= htmlspecialchars($user['zipcode']); ?>">
+                                    </div>
+                                    <div>
+                                          <div class="form-button">
+                                                <button class="submit" name="submit" type="submit"><i class="edit fas fa-edit fa-2x"></i></button>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>
+                  </div>
+            </div>
+      </section>
+<?php endif; ?>

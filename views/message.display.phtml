@@ -1,0 +1,24 @@
+<!-- If log in, display sended message data from user -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+
+<!-- Sended message view -->
+<section>
+      <h2>Message envoyé</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <div class="container">
+                              <h4>Objet</h4>
+                              <p class="message-display-title"><?= $message['title'];?></p>
+                        </div>
+                        <div>
+                              <p><?= $message['content'];?></p>
+                        </div>
+                        <div>
+                              <p class="bolder"><i><?= $message['created_date'];?></i></p>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

@@ -1,0 +1,17 @@
+<!-- If log in, users can add favorite products into their localStorage -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+<!-- Favorite list display -->
+<section>
+      <h2>Vos favoris</h2>
+      <div class="background">
+            <div class="grid-flex-container">
+                  <!-- Display favorite list from localStorage (JS files) -->
+                  <div class="favorite"></div>
+            </div>
+            <!-- Empty all the favorite list from localStorage -->
+            <div class="favorite-trashbin">
+                  <button class="border-icons empty-favorite"><i class="trash fas fa-trash fa-2x"></i></button>
+            </div>
+      </div>
+</section>
+<?php endif;?>

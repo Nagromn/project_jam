@@ -1,0 +1,51 @@
+<!-- Homepage view -->
+<section>
+      <h2>Annonces</h2>
+            <div class="background">
+                  <div class="grid-flex-container">
+                        <!-- Display all products from database -->
+                        <?php foreach($products as $product): ?>
+                        <div class="item">
+                              <article>
+                                    <img src="<?=strtok($product['files'],',')?>" alt=<?= $product["product_name"];?>/>
+                                    <hr>
+                                    <div>
+                                          <div>
+                                                <h3><?= $product['product_name']?></h3>
+                                          </div>
+                                          <div>
+                                                <strong><?= $product['price'].'€'?></strong>
+                                          </div>
+                                          <div>
+                                                <p><i class="fas fa-clock"></i><?=' '.$product['created_date']?></p>
+                                          </div>
+                                    </div>
+                                    <hr>
+                                    <!-- If log in, users can use icons -->
+                                    <?php if (Session::isConnected() && $_SESSION['auth']):?>
+                                    <div class="article-icons">
+                                          <div class="border-icons">
+                                                <a href="favorite.php" 
+                                                class="addfavorite" 
+                                                data-id="<?= $product["id"];?>" 
+                                                data-file="<?= strtok($product["files"],',')?>" 
+                                                data-product_name="<?= $product["product_name"];?>" 
+                                                data-price="<?= $product["price"];?>"
+                                                >Favoris</a>
+                                          </div>
+                                                <!-- Send message to product owner -->
+                                          <div class="border-icons">
+                                                <a href="messenger.php?id=<?= $product['user_id'];?>"><i class="letter fas fa-envelope fa-2x"></i></a>
+                                          </div>
+                                                <!-- Display product on full page -->
+                                          <div class="border-icons">
+                                                <a href="productPage.php?id=<?= $product['id'];?>"><i class="eye fas fa-eye fa-2x"></i></a>
+                                          </div>
+                                    <?php endif;?>
+                              </article>
+                        </div>
+                        <?php endforeach;?>
+                  </div>
+            </div>
+      </div>
+</section>

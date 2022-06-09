@@ -1,0 +1,66 @@
+<!-- If log in, display user's personnal data and products online -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+<!-- Role value: 
+      default value = 1 (members), 
+      value = 2 (admins) 
+-->
+
+<!-- UPDATE PRODUCT SECTION -->
+<section>
+      <h2>Modification de votre annonce</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form enctype="multipart/form-data" action="updateProduct.php" method="POST">
+                              <input type="hidden" name="id" value="<?= $id ?>">
+                              <label for="image">Ajoutez des photos</label>
+                              <input type="file" id="image" name="userfiles[]" multiple/>
+                              <div class="frames" id="frames"></div>
+                              <div class="grid-flex-container">
+                              <?php foreach(explode(',', $product['files']) as $file):?>
+                                    <div class="update-img">
+                                          <img src="<?= $file?>" alt="<?=$product['product_name']?>"/>
+                                    </div>
+                              <?php endforeach;?>
+                              </div>
+                              <div class="border-icons">
+                                    <a href="deleteUpload.php?id=<?=$id;?>"><i class="trash fas fa-trash fa-2x"></i></a>
+                              </div>
+                              <div>
+                                    <label for="product_name">Titre</label>
+                                    <input type="text" id="product_name" name="product_name" value="<?= htmlspecialchars($product['product_name']);?>"/>
+                              </div>
+                                    <div>
+                                          <label for="category">Choisissez la catégorie</label>
+                                          <select name="category_id" id="category">
+                                          <?php foreach($categories as $category): ?>
+                                                <option value="<?=$category['id'];?>"><?= $category['name'];?></option>
+                                          <?php endforeach ?>
+                                          </select>
+                                    </div>
+                              <div>
+                                    <label for=description>Description</label>
+                                    <textarea name="description" id="description" rows="15" cols="25"><?= $product['description']?></textarea>
+                              </div>
+                              <div>
+                                    <label for="status">Etat</label>
+                                    <select name="status" id="status">
+                                          <option value="">-</option>
+                                          <option value="Neuf">Neuf</option>
+                                          <option value="Très bon">Très bon</option>
+                                          <option value="Bon">Bon</option>
+                                    </select>
+                              </div>
+                              <div>
+                                    <label for=price>Prix</label>
+                                    <input type="text" name="price" id="price" value="<?= htmlspecialchars($product['price']);?>"> €</input>
+                              </div>
+                              <div class="form-button">
+                                    <button class="submit" type="submit"><i class="edit fas fa-edit fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

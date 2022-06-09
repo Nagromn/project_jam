@@ -1,0 +1,74 @@
+<!-- Product in full page display -->
+<section>
+      <h2><?=$product['product_name']?></h2>
+      <div class="background">
+            <div class="grid-flex-container">
+                  <article>
+                        <?php foreach(explode(',', $product['files']) as $file): ?>
+                        <div class="slideshow-container">
+                              <div class="mySlides">
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                          <img src="<?= $file ?>" alt="<?=$product['product_name']?>"/>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                              </div>
+                        </div>
+                        <?php endforeach ;?>
+                        <div class="dots-align">
+                              <span class="dot" onclick="currentSlide(1)"></span>
+                              <span class="dot" onclick="currentSlide(2)"></span>
+                              <span class="dot" onclick="currentSlide(3)"></span>
+                        </div>
+                        <hr>
+                        <div>
+                              <h3><?=$product['product_name']?></h3>
+                              <div>
+                                    <strong><?=$product['price'].'€'?></strong>
+                              </div>
+                              <div>
+                                    <p><i class="fas fa-clock"></i><?=' '.$product['created_date']?></p>
+                              </div>
+                              <hr>
+                              <div>
+                                    <h4>Description</h4>
+                                    <p><?=$product['description']?></p>
+                              </div>
+                              <hr>
+                              <div>
+                                    <h4>Critères</h4>
+                                    <div class="flex">
+                                          <div class="product-criteria">
+                                                <h5>Etat</h5>
+                                                <p><?=$product['status']?></p>
+                                          </div>
+                                          <div class="product-criteria">
+                                                <h5>Catégorie</h5>
+                                                <p><?= $product['name']?></p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <hr>
+                              <div>
+                                    <p><i class="fas fa-user"></i><?=' '.$product['username']?></p>
+                              </div>
+                              <?php if (Session::isConnected() && $_SESSION['auth']):?>
+                              <div class="article-icons">
+                                    <div class="border-icons">
+                                          <a href="favorite.php" 
+                                          class="addfavorite" 
+                                          data-id="<?= $product['product_id'];?>" 
+                                          data-file="<?= strtok($product["files"],',')?>" 
+                                          data-product_name="<?= $product["product_name"];?>" 
+                                          data-price="<?= $product["price"];?>"
+                                          >Favoris
+                                          </a>
+                                    </div>
+                                    <div class="border-icons">
+                                          <a href="messenger.php?id=<?= $product['user_id'];?>"><i class="letter fas fa-envelope fa-2x"></i></a>
+                                    </div>
+                              </div>
+                              <?php endif;?>
+                        </div>
+                  </article>
+            </div>
+      </div>
+</section>

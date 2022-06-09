@@ -1,0 +1,62 @@
+<!-- If log in, display sended message data from user, user can reply below -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+
+<!-- RECEIVED MESSAGE SECTION -->
+<section>
+      <h2>Message reçu</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <div class="message-container">
+                              <div>
+                                    <h4 for="title">Objet</h4>
+                              </div>
+                              <div>
+                                    <p class="message"><?= $message['title'];?></p>
+                              </div>
+                        </div>
+                        <div class="message-container">
+                              <div>
+                                    <h4 for="title">Message</h4>
+                              </div>
+                              <div>
+                                    <p class="message"><?= $message['content'];?></p>
+                              </div>
+                        </div>
+                        <div class="message-container">
+                              <div>
+                                    <h4 for="date">Date</h4>
+                              </div>
+                              <div>
+                                    <p class="message bolder"><i><?= $message['created_date'];?></i></p>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</section>
+
+<!-- REPLY SECTION -->
+<section>
+      <h2>Répondre</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form action="messageReply.php" method="POST">
+                              <input type="hidden" name="id" value="<?= $message['sender_id'];?>">
+
+                              <label for="title">Objet :</label>
+                              <input type="text" name="title" id="title">
+
+                              <label for="content">Message :</label>
+                              <textarea name="content" id="content"></textarea>
+
+                              <div class="form-button">
+                                    <button type="submit" class="submit"><i class="fas fa-paper-plane fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

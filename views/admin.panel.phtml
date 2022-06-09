@@ -1,0 +1,204 @@
+<!-- If log in, display users personnal data and products registered -->
+<?php if (Session::isConnected() && $_SESSION['auth']['role'] == 2) : ?>
+      <!-- Role value: 
+      default value = 1 (members), 
+      value = 2 (admins) 
+-->
+
+      <!-- USER SECTION -->
+      <section>
+            <h2 id="users-data">Utilisateurs du site</h2>
+            <div class="background">
+                  <div class="userdata">
+                        <div class="panel">
+                              <table>
+                                    <thead>
+                                          <tr>
+                                                <th>Id</th>
+                                                <th>User</th>
+                                                <th>Rôle</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <?php foreach ($users as $user) : ?>
+                                                <tr>
+                                                      <!-- Display all users registered -->
+                                                      <td>
+                                                            <?= $user['id']; ?>
+                                                      </td>
+                                                      <td>
+                                                            <?= $user['username']; ?>
+                                                      </td>
+                                                      <td>
+                                                            <?= $user['name']; ?>
+                                                      </td>
+                                                      <td>
+                                                            <a href="messenger.php?id=<?= $user['id']; ?>"><i class="table-letter fas fa-envelope"></i></a>
+                                                      </td>
+                                                      <td>
+                                                            <a href="deleteUser.php?id=<?= $user['id']; ?>"><i class="table-trash fas fa-trash-alt"></i></a>
+                                                      </td>
+                                                </tr>
+                                          <?php endforeach ?>
+                                    </tbody>
+                              </table>
+                        </div>
+                  </div>
+                  <div class="counter margin">
+                        <i class="fas fa-users"></i>
+                        <strong><?= $countUsers . ' Utilisateurs' ?></strong>
+                  </div>
+            </div>
+      </section>
+
+      <!-- ROLE SECTION -->
+      <section>
+            <h2 id="role">Liste des rôles</h2>
+            <div class="background">
+                  <div class="userdata">
+                        <div class="panel">
+                              <table>
+                                    <thead>
+                                          <tr>
+                                                <th>Rôle</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <!-- Display all roles -->
+                                          <?php foreach ($roles as $role) : ?>
+                                                <tr>
+                                                      <td>
+                                                            <?= $role['name']; ?>
+                                                      </td>
+                                                      <td>
+                                                            <a href="updateRole.php?id=<?= $role['id']; ?>"><i class="table-edit fas fa-edit "></i></a>
+                                                      </td>
+                                                      <td>
+                                                            <a href="deleteRole.php?id=<?= $role['id']; ?>"><i class="table-trash fas fa-trash-alt"></i></a>
+                                                      </td>
+                                                </tr>
+                                          <?php endforeach ?>
+                                    </tbody>
+                              </table>
+                              <div>
+                                    <h4>Ajouter rôle</h4>
+                                    <form action="adminPanel.php" method="POST">
+                                          <!-- Adding new role into database -->
+                                          <div>
+                                                <label for="role"><input type='text' id='role' name='role' /></label>
+                                          </div>
+                                          <div class="add">
+                                                <button class="submit" type="submit"><i class="fas fa-plus"></i></button>
+                                          </div>
+                                    </form>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="counter margin">
+                        <i class="fas fa-user-tag"></i>
+                        <strong><?= $countRoles . ' Rôles' ?></strong>
+                  </div>
+            </div>
+      </section>
+
+      <!-- CATEGORY SECTION -->
+      <section>
+            <h2 id="category">Liste des catégories</h2>
+            <div class="background">
+                  <div class="userdata">
+                        <div class="panel">
+                              <table>
+                                    <thead>
+                                          <tr>
+                                                <th>Nom</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <!-- Display all categories  -->
+                                          <?php foreach ($categories as $category) : ?>
+                                                <tr>
+                                                      <td><?= $category['name']; ?></td>
+                                                      <!-- Edit category name from data -->
+                                                      <td>
+                                                            <a href="updateCategory.php?id=<?= $category['id']; ?>"><i class="table-edit fas fa-edit "></i></a>
+                                                      </td>
+                                                      <!-- Delete category name from data -->
+                                                      <td>
+                                                            <a href="deleteCategory.php?id=<?= $category['id']; ?>"><i class="table-trash fas fa-trash-alt"></i></a>
+                                                      </td>
+                                                </tr>
+                                          <?php endforeach ?>
+                                    </tbody>
+                              </table>
+                              <!-- Adding new category into database -->
+                              <div>
+                                    <h4>Ajouter catégorie</h4>
+                                    <form enctype="multipart/form-data" action="adminPanel.php" method="POST">
+                                          <div>
+                                                <label for="category">
+                                                      <input type='text' id='category' name='name' />
+                                                </label>
+                                          </div>
+                                          <div class="add">
+                                                <button class="submit" type="submit"><i class="fas fa-plus"></i></button>
+                                          </div>
+                                    </form>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="counter margin">
+                        <i class="fas fa-list-alt"></i>
+                        <strong><?= $countCategories . ' Catégories' ?></strong>
+                  </div>
+            </div>
+      </section>
+
+      <!-- PRODUCT SECTION -->
+      <section>
+            <h2 id="post">Annonces du site</h2>
+            <div class="background">
+                  <div class="grid-flex-container">
+                        <!-- Display all products  -->
+                        <?php foreach ($products as $product) : ?>
+                              <div class="item">
+                                    <article>
+                                          <img src="<?= strtok($product['files'], ',') ?>" alt="<?= $product['product_name'] ?>" />
+                                          <hr>
+                                          <div>
+                                                <div>
+                                                      <h3><?= $product['product_name'] ?></h3>
+                                                </div>
+                                                <div>
+                                                      <strong><?= $product['price'] . '€' ?></strong>
+                                                </div>
+                                                <div>
+                                                      <p><i class="fas fa-clock"></i><?= ' ' . $product['created_date'] ?></p>
+                                                </div>
+                                          </div>
+                                          <hr>
+                                          <div class="article-icons">
+                                                <!-- Delete product from data -->
+                                                <div class="border-icons">
+                                                      <a href="deleteProduct.php?id=<?= intval($product['id']) ?>"><i class="trash fas fa-trash-alt fa-2x"></i></a>
+                                                </div>
+                                                <!-- Send private message to product owner -->
+                                                <div class="border-icons">
+                                                      <a href="messenger.php?id=<?= $product['user_id']; ?>"><i class="letter fas fa-envelope fa-2x"></i></a>
+                                                </div>
+                                                <!-- Check the product full page -->
+                                                <div class="border-icons">
+                                                      <a href="productPage.php?id=<?= $product['id']; ?>"><i class="eye fas fa-eye fa-2x"></i></a>
+                                                </div>
+                                          </div>
+                                    </article>
+                              </div>
+                        <?php endforeach; ?>
+                  </div>
+                  <!-- Counter for each annonce saved into database -->
+                  <div class="counter-product">
+                        <i class="fas fa-tags"></i>
+                        <strong><?= $countProducts . ' Annonces' ?></strong>
+                  </div>
+            </div>
+      </section>
+<?php endif; ?>

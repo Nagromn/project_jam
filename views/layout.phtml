@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+      <meta charset="UTF-8">
+      <meta name="description" content="Le site d'annonce entre particuliers">
+      <!-- Favicon -->
+      <link rel="icon" href="assets/img/logo_JAM-03.svg" type="image/x-icon" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Project Jam - <?= $pageTitle ?></title>
+      <!-- Lib Font Awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+      <!-- Stylesheet CSS -->
+      <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+      <!-- HEADER -->
+      <header>
+            <div class="svg-container">
+                  <img src="assets/img/logo_JAM-03.svg" alt="Logo du site">
+            </div>
+            <!-- Navigation -->
+            <nav>
+                  <ul id="isActive">
+                        <li class="nav-link">
+                              <a href="./home.php"><i class="fas fa-home fa-2x"></i></a>
+                        </li>
+                        <li class="nav-link">
+                              <a href="./login.php"><i class="fas fa-sign-in-alt fa-2x"></i></a>
+                        </li>
+                        <?php if (Session::isConnected() && $_SESSION['auth']):?>
+                              <li class="nav-link">
+                                    <div class="dropdown">
+                                          <a href="./userProfile.php"><i class="fas fa-user-circle fa-2x"></i></a>
+                                          <div class="dropdown-content">
+                                                <ul class="sub-nav">
+                                                      <li><a href="./userProfile.php#personal-data" target="_parent">Données personnelles</a></li>
+                                                      <li><a href="./userProfile.php#personal-post" target="_parent">Annonces</a></li>
+                                                      <li><a href="./userProfile.php#received-msg" target="_parent">Messages reçus</a></li>
+                                                      <li><a href="./userProfile.php#sent-msg" target="_parent">Messages envoyés</a></li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                              </li>
+                              <li class="nav-link">
+                                    <a href="./favorite.php"><i class="fas fa-heart fa-2x"></i></a>
+                              </li>
+                              <li class="nav-link">
+                                    <a href="./addProduct.php"><i class="fas fa-plus fa-2x"></i></a>
+                              </li>
+                        <?php if (Session::isConnected() && $_SESSION['auth']['role'] == 2):?>
+                              <li class="nav-link">
+                                    <div class="dropdown">
+                                          <a href="./adminPanel.php"><i class="fas fa-user-secret fa-2x"></i></a>
+                                          <div class="dropdown-content">
+                                                <ul class="sub-nav">
+                                                      <li><a href="./adminPanel.php#users-data" target="_parent">Utilisateurs</a></li>
+                                                      <li><a href="./adminPanel.php#role" target="_parent">Rôles</a></li>
+                                                      <li><a href="./adminPanel.php#category" target="_parent">Catégories</a></li>
+                                                      <li><a href="./adminPanel.php#post" target="_parent">Annonces</a></li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                              </li>
+                        <?php endif?>
+                              <li class="nav-link">
+                                    <a href="./logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+                              </li>
+                        <?php endif?>
+                  </ul>
+            </nav>
+            <!-- Display message condition -->
+            <div class="message-success">
+                  <?php if(!empty($_SESSION['success'])):
+                              echo "<div class='success'>".$_SESSION['success']."</div>";
+                              unset($_SESSION['success'])?>
+                  <?php endif?>
+            </div>
+            <div class="message-error">
+                  <?php if(!empty($_SESSION['error'])):
+                              echo "<div class='error'>".$_SESSION['error']."</div>";
+                              unset($_SESSION['error'])?>
+                  <?php endif?>
+            </div>
+      </header>
+      <!-- MAIN -->
+      <main>
+            <!-- Display page content -->
+            <?= $pageContent ?>
+      </main>
+      <div>
+            <a class="back-top" href="#">Retourner en haut<i class="fas fa-arrow-up"></i></a>
+      </div>
+      <!-- FOOTER -->
+      <footer>
+            <div>
+                  <ul>
+                        <li class="social"><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-2x"></i></a></li>
+                        <li class="social"><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></li>
+                        <li class="social"><a href="https://discord.com" target="_blank"><i class="fab fa-discord fa-2x"></i></a></li>
+                        <li class="social"><a href="mailto:project-jam@outlook.com"><i class="fas fa-envelope fa-2x"></i></a></li>
+                  </ul>
+            </div>
+            <div class="copyright"><p>&copy; Copyright 2021 Project_Jam.fr</p></div>
+      </footer>
+<!-- Script JQUERY -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- Script JS -->
+<script src="js/navigation.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/displayImage.js"></script>
+<script type="module" src="js/favorite.js"></script>
+<script type="module" src="js/localStorage.js"></script>
+<script type="module" src="js/event.js"></script>
+<script type="module" src="js/storage.js"></script>
+</body>
+</html>

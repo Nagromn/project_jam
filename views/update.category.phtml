@@ -1,0 +1,28 @@
+<!-- If log in, display users personnal data and products registered -->
+<?php if (Session::isConnected() && $_SESSION['auth']['role'] == 2):?>
+<!-- Role value: 
+      default value = 1 (members), 
+      value = 2 (admins) 
+-->
+
+<!-- UPDATE CATEGORY SECTION -->
+<section>
+      <h2>Modification de la catégorie</h2>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form action="updateCategory.php" method="POST">
+                              <input type="hidden" name="id" value="<?= htmlspecialchars($id);?>">
+                              
+                              <label for="category">Catégorie:</label>
+                              <input type="text" id="category" name="name" value="<?= htmlspecialchars($category['name']);?>">
+
+                              <div class="form-button">
+                                    <button class="submit" type="submit"><i class="edit fas fa-edit fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>

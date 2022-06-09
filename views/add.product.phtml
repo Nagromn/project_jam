@@ -1,0 +1,50 @@
+<!-- If log in, users can insert new product into database -->
+<?php if (Session::isConnected() && $_SESSION['auth']):?>
+<section>
+      <div class="background">
+            <div class="userdata">
+                  <div class="panel">
+                        <form enctype="multipart/form-data" action="addProduct.php" method="POST">
+
+                              <label for="image">Ajoutez des photos</label>
+                              <input type="file" id="image" name="userfiles[]" multiple/>
+
+                              <div class="container">
+                                    <div class="frames" id="frames"></div>
+                              </div>
+
+                              <label for="product_name">Titre de l'annonce</label>
+                              <input type="text" id="product_name" name="product_name" placeholder="Titre de votre annonce" required/>
+                              
+                              <label for="category_id">Choisissez une catégorie</label>
+                              <select name="category_id" id="category_id" required>
+                                    <option value="">-</option>
+                                    <!-- Display all categories -->
+                                    <?php foreach($categories as $category): ?>
+                                          <option value="<?=$category['id'];?>"><?= $category['name'];?></option>
+                                    <?php endforeach ?>
+                              </select>
+
+                              <label for="description">Description</label>
+                              <textarea name="description" id="description" placeholder="Description de votre annonce" required></textarea>
+
+                              <label for="status">Etat</label>
+                              <select name="status" id="status" required>
+                                    <option value="">-</option>
+                                    <option value="Neuf">Neuf</option>
+                                    <option value="Très bon">Très bon</option>
+                                    <option value="Bon">Bon</option>
+                              </select>
+
+                              <label for="price">Prix</label>
+                              <input name="price" id="price" placeholder="Prix de votre article" required><span> €</span>
+
+                              <div class="form-button">
+                                    <button class="submit" type="submit" name="submit"><i class="fas fa-paper-plane fa-2x"></i></button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</section>
+<?php endif;?>
